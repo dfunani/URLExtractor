@@ -1,0 +1,12 @@
+{
+	"version": 3,
+	"": ,
+	"name": "URL Extractor",
+	"actions": {
+		"default_popup": "index.html",
+		"default_icon": "icon.png"
+	},
+	"permissions": [
+		"tabs"
+	]
+}
