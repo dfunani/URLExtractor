@@ -22,11 +22,17 @@ get_tab.addEventListener('click', get_current_tab);
 delete_all_btn.addEventListener('click', delete_all);
 
 // Chrome API for Get Active WIndows Current Tab
-function get_current_tab() {
-	let tab_url = chrome.tabs.query({ "active": true, "currentWindow": true }, function (tabs) {
-		return tabs[0].url;
+function get_current_tab(callback) {
+	let queryOptions = { active: true, lastFocusedWindow: true };
+	chrome.tabs.query(queryOptions, ([tab]) => {
+		if (chrome.runtime.lastError)
+			console.error(chrome.runtime.lastError);
+		// `tab` will either be a `tabs.Tab` instance or `undefined`.
+		console.log(tab);
+		store_url(tab.url);
+		callback(tab);
 	});
-	store_url(tab_url)
+
 }
 
 function delete_all() {
